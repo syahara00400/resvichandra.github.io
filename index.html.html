@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Digital Grafika Komputer - Resvi</title>
+    <style>
+        :root {
+            --bg-dark: #230C13;       /* Latar belakang web sangat gelap */
+            --card-bg: #49151F;       /* Kartu / background section */
+            --text-light: #ffffff;    /* Teks putih terang */
+            --text-grey: #fbcfe8;     /* Teks pink lembut */
+            --accent-red: #B33240;    /* Aksen merah utama */
+            --accent-pink: #E28C9F;   /* Aksen pink cerah */
+            --accent-dark: #78212C;   /* Garis atau border */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Bagian Profil / Utama */
+        .profile-section {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .photo-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%; /* Memastikan bentuk lingkaran sempurna */
+            overflow: hidden; /* Mencegah gambar keluar dari bentuk lingkaran */
+            flex-shrink: 0;
+            border: 4px solid var(--accent-red);
+            box-shadow: 0 0 20px rgba(179, 50, 64, 0.3);
+            background-color: var(--card-bg);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .photo-placeholder-text {
+            color: var(--text-grey);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Menyesuaikan ukuran agar proporsional */
+             object-position: 50% 50%; /* Fokus ke tengah atas agar wajah tidak terpotong */
+            filter: brightness(1.1) contrast(1.05); /* Sedikit mencerahkan visual */
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        .profile-info {
+            flex-grow: 1;
+        }
+
+        h1 {
+            color: var(--text-light);
+            margin-bottom: 5px;
+            font-size: 2.2rem;
+            font-weight: 800;
+        }
+
+        .nickname {
+            color: var(--text-grey);
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .contact-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .contact-icon {
+            width: 18px;
+            height: 18px;
+            color: var(--accent-pink);
+        }
+
+        /* Kartu Hobi */
+        .hobi-card {
+            background-color: var(--bg-dark);
+            border-radius: 12px;
+            border: 1px solid var(--accent-dark);
+            padding: 20px;
+            width: 300px;
+        }
+
+        .hobi-title {
+            color: var(--accent-pink);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .hobi-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .hobi-content span {
+            font-size: 1.3rem;
+        }
+
+        .hobi-description {
+            font-size: 0.9rem;
+            color: var(--text-grey);
+            text-align: justify;
+        }
+
+        /* Tombol Navigasi Menu */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background-color: var(--accent-red);
+            color: var(--text-light);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-pink);
+            color: var(--bg-dark);
+        }
+
+        .btn-secondary {
+            background-color: var(--card-bg);
+            color: var(--text-light);
+            border: 1px solid var(--accent-dark);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-dark);
+            color: var(--text-light);
+        }
+
+        /* Tombol Back Panah Hitam di Atas */
+        .btn-back {
+            background-color: #000000;
+            color: var(--text-light);
+            padding: 12px 20px;
+            border: 1px solid var(--accent-dark);
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-back:hover {
+            background-color: #230c13;
+        }
+
+        /* Bagian Konten (Biodata & Tugas) */
+        .content-section {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
+            display: none; 
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-light);
+        }
+
+        .section-description {
+            color: var(--text-grey);
+            margin-bottom: 20px;
+        }
+
+        /* Grid Galeri 3x2 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            background-color: var(--bg-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--accent-dark);
+            aspect-ratio: 16 / 9; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Gambar utuh tidak terpotong */
+        }
+
+        /* Pendidikan & Organisasi */
+        .edu-item, .org-item {
+            background-color: var(--bg-dark);
+            border-left: 4px solid var(--accent-pink);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 20px;
+        }
+        
+        .edu-year, .org-role {
+            font-weight: bold;
+            color: var(--accent-pink);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .edu-school, .org-desc {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .edu-desc {
+            color: var(--text-grey);
+            font-size: 0.95rem;
+        }
+
+        /* Dashboard Tugas */
+        .task-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .btn-task {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            border: 1px solid var(--accent-dark);
+            padding: 14px 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            flex: 1 1 200px;
+        }
+
+        .btn-task:hover {
+            background-color: var(--accent-dark);
+            border-color: var(--accent-pink);
+            color: var(--accent-pink);
+            transform: translateY(-3px);
+        }
+
+        h3 {
+            color: var(--text-light);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            border-bottom: 2px solid var(--accent-dark);
+            padding-bottom: 5px;
+        }
+
+        @media (max-width: 900px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hobi-card {
+                width: 100%;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="profile-section">
+            
+            <div class="photo-container">
+                <div class="photo-placeholder">
+                    <span class="photo-placeholder-text">Foto Diri</span>
+                </div>
+                <img src="foto diri.jpg" alt="Foto Diri Resvi" class="profile-img" onerror="this.onerror=null; this.src='foto diri.png';">
+            </div>
+
+            <div class="profile-info">
+                <h1>Resvi Chandra Septia Syaharani</h1>
+                <p class="nickname">"Resvi"</p>
+                <ul class="contact-list">
+                    <li class="contact-item"><span class="contact-icon">📍</span> Bandar Lampung</li>
+                    <li class="contact-item"><span class="contact-icon">📅</span> 10 September 2006</li>
+                    <li class="contact-item"><span class="contact-icon">✉️</span> rsvcndr@gmail.com</li>
+                    <li class="contact-item"><span class="contact-icon">🔗</span> resvichandra</li>
+                </ul>
+            </div>
+
+            
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn" onclick="tampilSection('biodata')">Kenali Biodata Saya</button>
+            <button class="btn btn-secondary" onclick="tampilSection('tugas')">Lihat Dashboard Tugas</button>
+        </div>
+
+        <div class="content-section" id="biodata">
+
+            <style>
+    .hobi-card-single {
+        background-color: var(--bg-dark);
+        border-radius: 12px;
+        border: 1px solid var(--accent-dark);
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+        margin: 0 auto;
+    }
+    .hobi-content-single {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: var(--text-light);
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+    .hobi-title-single {
+        color: var(--accent-pink);
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+    }
+    .hobi-description-single {
+        font-size: 0.9rem;
+        color: var(--text-grey);
+        text-align: center;
+    }
+    .hobi-content-single span {
+        font-size: 1.3rem;
+    }
+</style>
+
+<div class="hobi-card-single">
+    <div class="hobi-title-single">Minat & Hobi</div>
+    <div class="hobi-content-single">
+        <span>🎨</span> Melukis
+    </div>
+    <p class="hobi-description-single">
+        Senang melukis jika waktu luang
+    </p>
+                </div>
+            
+                
+
+            
+            <button class="btn-back" onclick="tutupSection()">
+                <span>⬅️</span> Kembali
+            </button>
+            
+
+            <div class="section-header">
+                <span class="section-icon">🎓</span>
+                <h2>Latar Belakang Pendidikan</h2>
+            </div>
+            
+            <div class="edu-item">
+                <div class="edu-year">2013 – 2019</div>
+                <div class="edu-school">SD Negeri 3 Gedung Air</div>
+                <div class="edu-desc">Menempuh pendidikan dasar dengan penuh semangat dan mulai mengenal dunia seni sejak dini.</div>
+            </div>
+            <div class="edu-item">
+                <div class="edu-year">2019 – 2022</div>
+                <div class="edu-school">SMP Negeri 10 Bandar Lampung</div>
+                <div class="edu-desc">Aktif berorganisasi di PMR sebagai anggota hingga ketua di kelas akhir. Mengikuti Lomba Pertolongan Pertama di SMA Negeri 3 Bandar Lampung.</div>
+            </div>
+            <div class="edu-item">
+                <div class="edu-year">2022 – 2025</div>
+                <div class="edu-school">SMK Negeri 4 Bandar Lampung</div>
+                <div class="edu-desc">Bergabung dalam Pramuka sebagai Giatops. Aktif dalam lomba tari, pentas seni, perkemahan, serta berbagai kepanitiaan sekolah.</div>
+            </div>
+            <div class="edu-item">
+                <div class="edu-year">2025 – Sekarang</div>
+                <div class="edu-school">Universitas Lampung</div>
+                <div class="edu-desc">Saat ini sedang menempuh pendidikan tinggi di Universitas Lampung.</div>
+            </div>
+
+            <div class="section-header" style="margin-top: 40px;">
+                <span class="section-icon"></span>
+                <h2>Pengalaman Organisasi</h2>
+            </div>
+            <div class="org-item">
+                <div class="org-role">Ketua PMR (Palang Merah Remaja)</div>
+                <div class="org-school">SMP Negeri 10 Bandar Lampung</div>
+                <div class="org-desc">Menjabat sebagai anggota hingga dipercaya menjadi Ketua PMR. Aktif mengikuti Lomba Bagian Pertolongan Pertama yang diselenggarakan di SMA Negeri 3 Bandar Lampung.</div>
+            </div>
+            <div class="org-item">
+                <div class="org-role">Anggota Pramuka</div>
+                <div class="org-school">SMK Negeri 4 Bandar Lampung</div>
+                <div class="org-desc">Aktif sebagai anggota pramuka. Berpartisipasi dalam lomba tari, pentas seni menari, perkemahan, serta berbagai kegiatan kepanitiaan sekolah lainnya.</div>
+            </div>
+
+            <div class="section-header" style="margin-top: 50px;">
+                <span class="section-icon"></span>
+                <h2>Galeri Lukisan</h2>
+            </div>
+            <p class="section-description">
+                Berikut adalah karya visual yang dibuat untuk mengasah kepekaan visual:
+            </p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="lukisan 1.jpg" alt="Lukisan 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="lukisan 2.jpg" alt="Lukisan 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="lukisan 3.jpg" alt="Lukisan 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="lukisan 4.jpg" alt="Lukisan 4">
+                </div>
+                <div class="gallery-item">
+                    <img src="lukisan 5.jpg" alt="Lukisan 5">
+                </div>
+                <div class="gallery-item">
+                    <img src="lukisan 6.jpg" alt="Lukisan 6">
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" id="tugas">
+            
+            <button class="btn-back" onclick="tutupSection()">
+                <span>⬅️</span> Kembali
+            </button>
+
+            <div class="section-header">
+                <span class="section-icon">📊</span>
+                <h2>Dashboard Tugas Grafika Komputer</h2>
+            </div>
+            <p class="section-description">Silakan klik tombol di bawah ini untuk mengakses rincian tugas Anda:</p>
+            
+            <h3>Soal Pilihan Ganda (PG)</h3>
+            <div class="task-grid">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEyC9L-cJF9NgkA8E6w1eNAcOEDEBm-WReI82sxA7EtEKblA/viewform?usp=header" class="btn-task" target="_blank">PG 1: Pengertian & Tokoh</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScuVcqVZdqa3sxlhdumLm3j1Dl53SlwKU4603Tsn7LQQjEKag/viewform?usp=header" class="btn-task" target="_blank">PG 2: Sistem Grafika</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScuVcqVZdqa3sxlhdumLm3j1Dl53SlwKU4603Tsn7LQQjEKag/viewform?usp=header" class="btn-task" target="_blank">PG 3: Algoritma Garis</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScGNIKeUAm9rpMHA8W-bi_xkEcjP3HjJmxhuljD_AbfNnZPww/viewform?usp=header" class="btn-task" target="_blank">PG 4: Algoritma Lingkaran</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdzSav53N50fCNvhRt3250spVMK7H9CeeAg9G05fqYv02J-lw/viewform?usp=header" class="btn-task" target="_blank">PG 2: Kurva Bezier</a>
+            </div>
+
+            <h3>Tugas Kuis Video</h3>
+            <div class="task-grid">
+                <a href="https://youtu.be/WCHX_WlD9_k?si=jci-wT2Ac_spcyaS" class="btn-task" target="_blank">Kuis Video 1</a>
+                <a href="https://youtu.be/18aJ2-waip0?si=KuCq2V7C9gtZw6Pw" class="btn-task" target="_blank">Kuis Video 2</a>
+                <a href="https://youtu.be/n-9WODp1oRU?si=6VrDw6Y3rGySu82S" class="btn-task" target="_blank">Kuis Video 3</a>
+                <a href="https://youtu.be/icKxjYVShww?si=yUVhESDQI-xKU4W-" class="btn-task" target="_blank">Kuis Video 4</a>
+            </div>
+
+            <h3>Tabel Iterasi & Spreadsheet</h3>
+            <div class="task-grid">
+                <a href="https://docs.google.com/spreadsheets/d/1kEfANhI7FxEtAa2B2Ol46PmADretc3B8n-t6qaJ6J4Q/edit?usp=drive_link" class="btn-task" target="_blank">Tabel DDA Line</a>
+                <a href="https://docs.google.com/spreadsheets/d/1OY-ELuI7r4ceajEt23o7pT72PlVCJqoWHoCJ2qitUVI/edit?usp=drive_link" class="btn-task" target="_blank">Tabel Iterasi Circ</a>
+                <a href="https://docs.google.com/spreadsheets/d/16uoj46DbKACMGoC0UME3-wHlHzgGP1I_DKLBvVaPhHM/edit?usp=drive_link" class="btn-task" target="_blank">Tabel Iterasi Bezier</a>
+                <a href="https://docs.google.com/spreadsheets/d/1LXQnCj8GytRYO54JFzvAB4nCb3edvGa0Yl6-gDoGSSA/edit?usp=drive_link" class="btn-task" target="_blank">Tabel Transformasi</a>
+                <a href="https://docs.google.com/spreadsheets/d/1I022Rleifqi0s8bF_L6rVzIpijrADoO-/edit?usp=drive_link&ouid=108358740853475155417&rtpof=true&sd=true" class="btn-task" target="_blank">Titik Potong Cohen S.</a>
+                <a href="https://docs.google.com/spreadsheets/d/1yThcucO5Bzan9r1JW-GwyFBJLHNnr0At/edit?usp=drive_link&ouid=108358740853475155417&rtpof=true&sd=true" class="btn-task" target="_blank">Polygon Clipping</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function tampilSection(menu) {
+            document.getElementById('biodata').style.display = 'none';
+            document.getElementById('tugas').style.display = 'none';
+            
+            if (menu === 'biodata') {
+                document.getElementById('biodata').style.display = 'block';
+                window.scrollTo({ top: document.getElementById('biodata').offsetTop - 20, behavior: 'smooth' });
+            } else if (menu === 'tugas') {
+                document.getElementById('tugas').style.display = 'block';
+                window.scrollTo({ top: document.getElementById('tugas').offsetTop - 20, behavior: 'smooth' });
+            }
+        }
+
+        function tutupSection() {
+            document.getElementById('biodata').style.display = 'none';
+            document.getElementById('tugas').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
